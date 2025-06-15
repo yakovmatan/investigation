@@ -26,5 +26,22 @@ namespace investigation.iranianAgents
             }    
         }
 
+        public Dictionary<string,int> GetSensorRequirementCount()
+        {
+            Dictionary<string, int> dictWeaknessSensors = new Dictionary<string, int>();
+            for (int i = 0; i < weaknessSensors.Length; i++)
+            {
+                if (dictWeaknessSensors.ContainsKey(weaknessSensors[i]))
+                {
+                    dictWeaknessSensors[weaknessSensors[i]] += 1;
+                }
+                else
+                {
+                    dictWeaknessSensors[weaknessSensors[i]] = 1;
+                }
+            }
+            return dictWeaknessSensors;
+        }
+
     }
 }
