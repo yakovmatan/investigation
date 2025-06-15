@@ -33,25 +33,25 @@ namespace investigation.manager
 
         public void EnterChoose()
         {
-            Console.WriteLine($"In which location would you like to set the sensor? (0 - {numOfSensors[manager.agent.type] - 1}");
+            Console.WriteLine($"In which location would you like to set the sensor? (0 - {numOfSensors[manager.agent.type] - 1})");
             while (true)
             {
                 string input = Console.ReadLine();
 
                 int chosenIndex;
-                if (int.TryParse(input, out chosenIndex) && chosenIndex >= 0 && chosenIndex <= numOfSensors[manager.agent.type])
+                if (int.TryParse(input, out chosenIndex) && chosenIndex >= 0 && chosenIndex < numOfSensors[manager.agent.type])
                 {
                     break; 
                 }
 
-                Console.WriteLine("Invalid number. Please enter a number between 0 and " + numOfSensors[manager.agent.type] + ":");
+                Console.WriteLine($"Invalid number. Please enter a number between 0 and { numOfSensors[manager.agent.type] - 1} :");
             }
 
             Console.WriteLine("Available sensor type");
             Console.Write("types: ");
             foreach (var sensor in manager.availableSensors)
             {
-                Console.Write(sensor.type);
+                Console.Write($"{sensor.type}, ");
             }
             Console.WriteLine();
             string choose = this.ValidSensorSelection();
@@ -68,14 +68,14 @@ namespace investigation.manager
             }
         }
 
-        public string ValidSensorSelection()
+        private string ValidSensorSelection()
         {
             Console.WriteLine("Enter sensor type:");
             string choose;
 
             while (true)
             {
-                choose = Console.ReadLine();
+                choose = Console.ReadLine().ToLower();
 
                 bool isValid = manager.availableSensors.Any(s => s.type.Equals(choose, StringComparison.OrdinalIgnoreCase));
 
@@ -88,7 +88,7 @@ namespace investigation.manager
                 Console.Write("Available types: ");
                 foreach (var sensor in manager.availableSensors)
                 {
-                    Console.Write(sensor.type + " ");
+                    Console.Write(sensor.type + ", ");
                 }
                 Console.WriteLine();
             }
