@@ -12,9 +12,10 @@ namespace investigation.iranianAgents
         protected static Random random = new Random();
         protected string[] weaknessSensors;
 
-        public Agent(int numOfSensors,List<string> availableSensors)
+        public Agent(int numOfSensors,List<string> availableSensors,string type)
         {
             InitializeRandomSensors(numOfSensors, availableSensors);
+            this.type = type;
         }
         protected void InitializeRandomSensors(int numOfSensors,List<string> availableSensors)
         {
