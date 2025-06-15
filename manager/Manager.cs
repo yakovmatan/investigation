@@ -12,15 +12,16 @@ namespace investigation.manager
 {
     internal class Manager
     {
-        private List<string> TypesOfSensors = new List<string> { "Audio sensor", "Thermal sensor" };
-        private Agent footSoldier;
+        public Agent agent;
         private Sensor audioSensore = new AudioSensor();
         private Sensor thermalSensor = new ThermalSensor();
+        public List<Sensor> availableSensors;
         private Room room = new Room();
 
-        public Manager()
+        public Manager(Agent agent)
         {
-            this.footSoldier = new FootSoldier(TypesOfSensors);
+            this.agent = agent;
+            this.availableSensors = new List<Sensor> { audioSensore, thermalSensor };
         }
 
         // function to active sensor
@@ -38,7 +39,7 @@ namespace investigation.manager
         // function to get how much is maches
         public int NumOfMatches()
         {
-            return room.NumOfMatches(footSoldier.GetSensorRequirementCount());
+            return room.NumOfMatches(agent.GetSensorRequirementCount());
         }
     }
 }

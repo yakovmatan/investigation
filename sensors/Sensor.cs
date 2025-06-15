@@ -8,7 +8,7 @@ namespace investigation.sensors
 {
     internal abstract class Sensor
     {
-        protected string type;
+        public string type { get; }
 
         public Sensor(string type)
         {
