@@ -15,7 +15,7 @@ namespace investigation.sensors
             this.type = type;
         }
 
-        public void Activate(Dictionary<string, int> sensors)
+        public virtual void Activate(Dictionary<string, int> sensors)
         {
             if (sensors.ContainsKey(this.type))
             {
