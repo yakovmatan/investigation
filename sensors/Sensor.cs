@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace investigation.sensors
 {
-    internal abstract class Sensore
+    internal abstract class Sensor
     {
         protected string type;
 
-        public Sensore(string type)
+        public Sensor(string type)
         {
             this.type = type;
         }
