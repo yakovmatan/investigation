@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace investigation.iranianAgents
 {
-    internal class JuniorAgent:Agent
+    internal class FootSoldier:Agent
     {
-        public JuniorAgent(List<string> availableSensors):base(2,availableSensors,"junior")
+        public FootSoldier(List<string> availableSensors):base(2,availableSensors,"foot soldier")
         {
 
         }
