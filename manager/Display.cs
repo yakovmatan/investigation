@@ -51,7 +51,7 @@ namespace investigation.manager
             Console.Write("types: ");
             foreach (var sensor in manager.availableSensors)
             {
-                Console.Write($"{sensor.type}, ");
+                Console.Write($"{sensor.Key}, ");
             }
             Console.WriteLine();
             string choose = this.ValidSensorSelection();
@@ -77,7 +77,7 @@ namespace investigation.manager
             {
                 choose = Console.ReadLine().ToLower();
 
-                bool isValid = manager.availableSensors.Any(s => s.type.Equals(choose, StringComparison.OrdinalIgnoreCase));
+                bool isValid = manager.availableSensors.ContainsKey(choose);
 
                 if (isValid)
                 {
@@ -88,7 +88,7 @@ namespace investigation.manager
                 Console.Write("Available types: ");
                 foreach (var sensor in manager.availableSensors)
                 {
-                    Console.Write(sensor.type + ", ");
+                    Console.Write(sensor.Key + ", ");
                 }
                 Console.WriteLine();
             }

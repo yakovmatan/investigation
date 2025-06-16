@@ -15,25 +15,28 @@ namespace investigation.manager
         public Agent agent;
         private Sensor audioSensore = new AudioSensor();
         private Sensor thermalSensor = new ThermalSensor();
-        public List<Sensor> availableSensors;
+        public Dictionary<string,Sensor> availableSensors;
         private Room room = new Room();
 
         public Manager(Agent agent)
         {
             this.agent = agent;
-            this.availableSensors = new List<Sensor> { audioSensore, thermalSensor };
+            this.availableSensors = new Dictionary<string,Sensor> 
+            {
+                {audioSensore.type,audioSensore },
+                {thermalSensor.type, thermalSensor }
+            };
         }
 
         // function to active sensor
         public void ActivateSensor(string type)
         {
-            if (type == "audio")
+            foreach (var keyValue in this.availableSensors)
             {
-                audioSensore.Activate(room.activeSensore);
-            }
-            else if (type == "thermal")
-            {
-                thermalSensor.Activate(room.activeSensore);
+                if (type == keyValue.Key)
+                {
+                    keyValue.Value.Activate(room.activeSensore);
+                }
             }
         }
         // function to get how much is maches
