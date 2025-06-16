@@ -10,6 +10,8 @@ namespace investigation.manager
     internal class Display
     {
         private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse" };
+        private List<Agent> agents;
+        private int currentAgentIndex = 0;
         private Manager manager;
         private Dictionary<string, int> numOfSensors = new Dictionary<string, int>
         {
@@ -21,10 +23,23 @@ namespace investigation.manager
             
         public Display()
         {
-            var agent = new FootSoldier(TypesOfSensors);
-            var amount = numOfSensors[agent.type]; 
-            manager = new Manager(agent, amount);
+            this.ShowWelcome();
+            agents = new List<Agent>
+            {
+                new FootSoldier(TypesOfSensors),
+                new SquadLeader(TypesOfSensors)
+            };
+            InitManagerForCurrentAgent();
 
+        }
+
+        private void InitManagerForCurrentAgent()
+        {
+            Agent currentAgent = agents[currentAgentIndex];
+            int amount = numOfSensors[currentAgent.type];
+            manager = new Manager(currentAgent, amount);
+
+            Console.WriteLine($"\n--- New Iranian Agent Detected: {currentAgent.type.ToUpper()} ---");
         }
 
         public void ShowWelcome()
@@ -67,8 +82,19 @@ namespace investigation.manager
             Console.WriteLine($"{numOfMatches}/{numOfSensors[manager.agent.type]} matched");
             if (numOfMatches == numOfSensors[manager.agent.type])
             {
-                Console.WriteLine("Iranian agent exposed!");
-                return true;
+                Console.WriteLine($"✔ Iranian agent exposed! ({manager.agent.type})");
+                currentAgentIndex++;
+                if (currentAgentIndex < agents.Count)
+                {
+                    Console.WriteLine("\n➡ Proceeding to the next agent...");
+                    InitManagerForCurrentAgent();
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("\n🎉🏅 All agents exposed. Mission complete!");
+                    return true;
+                }
             }
             return false;
         }

@@ -13,12 +13,11 @@ namespace investigation
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Display display = new Display();
-            display.ShowWelcome();
             while(true)
             {
                 display.EnterChoose();
-                bool agentExposed = display.ShowMatches();
-                if (agentExposed)
+                bool gameEnded = display.ShowMatches();
+                if (gameEnded)
                 {
                     break;
                 }
