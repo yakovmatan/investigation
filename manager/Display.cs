@@ -47,7 +47,7 @@ namespace investigation.manager
                     break; 
                 }
 
-                Console.WriteLine($"Invalid number. Please enter a number between 0 and { numOfSensors[manager.agent.type] - 1} :");
+                Console.WriteLine($"Invalid number. Please enter a number between 0 and { numOfSensors[manager.agent.type] - 1}.");
             }
 
             Console.WriteLine("Available sensor type");
