@@ -15,6 +15,7 @@ namespace investigation.manager
         public Agent agent;
         private Sensor audioSensore = new AudioSensor();
         private Sensor thermalSensor = new ThermalSensor();
+        private Sensor pulseSensor = new PulseSensor();
         public Dictionary<string,Sensor> availableSensors;
         private Room room;
 
@@ -25,7 +26,8 @@ namespace investigation.manager
             this.availableSensors = new Dictionary<string,Sensor> 
             {
                 {audioSensore.type,audioSensore },
-                {thermalSensor.type, thermalSensor }
+                {thermalSensor.type, thermalSensor },
+                {pulseSensor.type,pulseSensor }
             };
         }
 

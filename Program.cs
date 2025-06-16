@@ -11,6 +11,7 @@ namespace investigation
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             Display display = new Display();
             display.ShowWelcome();
             while(true)
