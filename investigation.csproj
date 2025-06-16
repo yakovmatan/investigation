@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="room\Room.cs" />
     <Compile Include="sensors\AudioSensor.cs" />
+    <Compile Include="sensors\PulseSensor.cs" />
     <Compile Include="sensors\Sensor.cs" />
     <Compile Include="sensors\ThermalSensor.cs" />
   </ItemGroup>

@@ -18,7 +18,9 @@ namespace investigation.sensors
         {
             if (count == 3)
             {
-                Console.WriteLine("The sensor is broken");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("⚠️ Sensor is broken and can no longer be used.");
+                Console.ResetColor();
                 return;
             }
             base.Activate(index, sensors);

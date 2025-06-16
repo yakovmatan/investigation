@@ -9,7 +9,7 @@ namespace investigation.manager
 {
     internal class Display
     {
-        private List<string> TypesOfSensors = new List<string> { "audio", "thermal" };
+        private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse" };
         private Manager manager;
         private Dictionary<string, int> numOfSensors = new Dictionary<string, int>
         {
