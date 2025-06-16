@@ -58,14 +58,16 @@ namespace investigation.manager
             manager.ActivateSensor(choose);
         }
 
-        public void ShowMatches()
+        public bool ShowMatches()
         {
             int numOfMatches = manager.NumOfMatches();
             Console.WriteLine($"{numOfMatches}/{numOfSensors[manager.agent.type]} matched");
             if (numOfMatches == numOfSensors[manager.agent.type])
             {
                 Console.WriteLine("Iranian agent exposed!");
+                return true;
             }
+            return false;
         }
 
         private string ValidSensorSelection()

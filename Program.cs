@@ -16,7 +16,11 @@ namespace investigation
             while(true)
             {
                 display.EnterChoose();
-                display.ShowMatches();
+                bool agentExposed = display.ShowMatches();
+                if (agentExposed)
+                {
+                    break;
+                }
             }
             
         }
