@@ -21,7 +21,10 @@ namespace investigation.manager
             
         public Display()
         {
-            manager = new Manager(new FootSoldier(TypesOfSensors));
+            var agent = new FootSoldier(TypesOfSensors);
+            var amount = numOfSensors[agent.type]; 
+            manager = new Manager(agent, amount);
+
         }
 
         public void ShowWelcome()
@@ -34,17 +37,17 @@ namespace investigation.manager
         public void EnterChoose()
         {
             Console.WriteLine($"In which location would you like to set the sensor? (0 - {numOfSensors[manager.agent.type] - 1})");
+            int chosenIndex;
             while (true)
             {
                 string input = Console.ReadLine();
 
-                int chosenIndex;
                 if (int.TryParse(input, out chosenIndex) && chosenIndex >= 0 && chosenIndex < numOfSensors[manager.agent.type])
                 {
                     break; 
                 }
 
-                Console.WriteLine($"Invalid number. Please enter a number between 0 and { numOfSensors[manager.agent.type] - 1} :");
+                Console.WriteLine($"Invalid number. Please enter a number between 0 and { numOfSensors[manager.agent.type] - 1}.");
             }
 
             Console.WriteLine("Available sensor type");
@@ -55,7 +58,7 @@ namespace investigation.manager
             }
             Console.WriteLine();
             string choose = this.ValidSensorSelection();
-            manager.ActivateSensor(choose);
+            manager.ActivateSensor( chosenIndex, choose);
         }
 
         public bool ShowMatches()

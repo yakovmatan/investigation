@@ -15,19 +15,9 @@ namespace investigation.sensors
             this.type = type;
         }
 
-        public virtual void Activate(Dictionary<string, int> sensors)
+        public virtual void Activate(int index,string[] sensors)
         {
-            if (sensors.ContainsKey(this.type))
-            {
-                sensors[this.type] += 1;
-                Console.WriteLine("add more seccessfully");
-            }
-            else
-            {
-                sensors[this.type] = 1;
-                Console.WriteLine("add new seccessfully");
-            }
-                
+            sensors[index] = this.type;
         }
     }
 }

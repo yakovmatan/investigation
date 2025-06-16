@@ -16,10 +16,11 @@ namespace investigation.manager
         private Sensor audioSensore = new AudioSensor();
         private Sensor thermalSensor = new ThermalSensor();
         public Dictionary<string,Sensor> availableSensors;
-        private Room room = new Room();
+        private Room room;
 
-        public Manager(Agent agent)
+        public Manager(Agent agent,int length)
         {
+            room = new Room(length);
             this.agent = agent;
             this.availableSensors = new Dictionary<string,Sensor> 
             {
@@ -29,13 +30,13 @@ namespace investigation.manager
         }
 
         // function to active sensor
-        public void ActivateSensor(string type)
+        public void ActivateSensor(int num,string type)
         {
             foreach (var keyValue in this.availableSensors)
             {
                 if (type == keyValue.Key)
                 {
-                    keyValue.Value.Activate(room.activeSensore);
+                    keyValue.Value.Activate(num,room.activeSensore);
                 }
             }
         }
