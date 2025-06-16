@@ -8,7 +8,7 @@ namespace investigation.sensors
 {
     internal class ThermalSensor:Sensor
     {
-        public ThermalSensor():base("Thermal")
+        public ThermalSensor():base("thermal")
         {
 
         }

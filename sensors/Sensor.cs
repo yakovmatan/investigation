@@ -20,10 +20,12 @@ namespace investigation.sensors
             if (sensors.ContainsKey(this.type))
             {
                 sensors[this.type] += 1;
+                Console.WriteLine("add more seccessfully");
             }
             else
             {
                 sensors[this.type] = 1;
+                Console.WriteLine("add new seccessfully");
             }
                 
         }
