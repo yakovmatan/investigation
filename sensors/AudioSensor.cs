@@ -8,7 +8,7 @@ namespace investigation.sensors
 {
     internal class AudioSensor:Sensor
     {
-        public AudioSensor():base("Audio sensor")
+        public AudioSensor():base("audio")
         {
 
         }

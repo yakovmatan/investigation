@@ -17,7 +17,7 @@ namespace investigation.room
             {
                 if (weaknessSensors.ContainsKey(keyValue.Key))
                 {
-                    numOfMatches += Math.Min(activeSensore[keyValue.Key], weaknessSensors[keyValue.Key]);
+                    numOfMatches += Math.Min(keyValue.Value, weaknessSensors[keyValue.Key]);
                 }
             }
             return numOfMatches;

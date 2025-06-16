@@ -8,7 +8,7 @@ namespace investigation.sensors
 {
     internal abstract class Sensor
     {
-        protected string type;
+        public string type { get; }
 
         public Sensor(string type)
         {
@@ -20,10 +20,12 @@ namespace investigation.sensors
             if (sensors.ContainsKey(this.type))
             {
                 sensors[this.type] += 1;
+                Console.WriteLine("add more seccessfully");
             }
             else
             {
                 sensors[this.type] = 1;
+                Console.WriteLine("add new seccessfully");
             }
                 
         }
