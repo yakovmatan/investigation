@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using investigation.sensors;
 
 namespace investigation.iranianAgents
 {
-    internal class SquadLeader:Agent,IAttackAgent
+    internal class OrganizationLeader:Agent,IAttackAgent
     {
         private int CounterAttack = 0;
-        public SquadLeader(List<string> availableSensors):base(4,availableSensors,"squad leader")
+
+        public OrganizationLeader(List<string> availableSensors):base(8,availableSensors,"organization leader")
         {
 
         }
@@ -21,7 +21,6 @@ namespace investigation.iranianAgents
             if (CounterAttack % 3 == 0)
             {
                 if (!sensors.Any(s => s != null)) return;
-
                 int index;
                 do
                 {
@@ -31,9 +30,15 @@ namespace investigation.iranianAgents
 
                 sensors[index] = null;
             }
+            else if (CounterAttack % 10 == 0)
+            {
+                for (int i = 0; i < sensors.Length; i++)
+                {
+                    sensors[i] = null;
+                }
+            }
             CounterAttack++;
-            
-            
         }
+
     }
 }
