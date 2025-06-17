@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace investigation.sensors
 {
-    public class SensorFactory
+    public static class SensorFactory
     {
         public static Sensor CreateSensor(string type)
         {

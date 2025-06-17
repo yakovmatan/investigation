@@ -38,7 +38,7 @@ namespace investigation.manager
             {
                 if (type == keyValue.Key)
                 {
-                    keyValue.Value.Activate(num,room.activeSensore);
+                    keyValue.Value.Activate(num,room.attachedSensore);
                 }
             }
         }
