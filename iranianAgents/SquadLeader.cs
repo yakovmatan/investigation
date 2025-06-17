@@ -18,14 +18,22 @@ namespace investigation.iranianAgents
 
         public void Attack(Sensor[] sensor)
         {
-            int index;
-            do
+            if (CounterAttack % 3 == 0)
             {
-                index = random.Next(sensor.Length);
-            }
-            while (sensor[index] == null);
+                if (!sensor.Any(s => s != null)) return;
 
-            sensor[index] = null;
+                int index;
+                do
+                {
+                    index = random.Next(sensor.Length);
+                }
+                while (sensor[index] == null);
+
+                sensor[index] = null;
+            }
+            CounterAttack++;
+            
+            
         }
     }
 }
