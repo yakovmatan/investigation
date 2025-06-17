@@ -8,12 +8,12 @@ using investigation.sensors;
 
 namespace investigation.manager
 {
-    internal class Display
+    internal class InvestigationController
     {
         private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse" };
         private List<Agent> agents;
         private int currentAgentIndex = 0;
-        private Manager manager;
+        private InvestigationLogic manager;
         private Dictionary<string, int> numOfSensors = new Dictionary<string, int>
         {
             {"foot soldier",2 },
@@ -22,7 +22,7 @@ namespace investigation.manager
             {"organisation leader", 8 }
         };
             
-        public Display()
+        public InvestigationController()
         {
             this.ShowWelcome();
             agents = new List<Agent>
@@ -30,15 +30,15 @@ namespace investigation.manager
                 new FootSoldier(TypesOfSensors),
                 new SquadLeader(TypesOfSensors)
             };
-            InitManagerForCurrentAgent();
+            InitLogicForCurrentAgent();
 
         }
 
-        private void InitManagerForCurrentAgent()
+        private void InitLogicForCurrentAgent()
         {
             Agent currentAgent = agents[currentAgentIndex];
             int amount = numOfSensors[currentAgent.type];
-            manager = new Manager(currentAgent, amount);
+            manager = new InvestigationLogic(currentAgent, amount);
 
             Console.WriteLine($"\n--- New Iranian Agent Detected: {currentAgent.type.ToUpper()} ---");
         }
@@ -72,7 +72,7 @@ namespace investigation.manager
             string choose = this.ValidSensorSelection();
             Sensor sensor = SensorFactory.CreateSensor(choose);
             manager.room.Attach(chosenIndex, sensor);
-            manager.ActivateSensor( );
+            manager.ActivateSensors( );
         }
 
         public bool ShowMatches()
@@ -86,7 +86,7 @@ namespace investigation.manager
                 if (currentAgentIndex < agents.Count)
                 {
                     Console.WriteLine("\n➡ Proceeding to the next agent...");
-                    InitManagerForCurrentAgent();
+                    InitLogicForCurrentAgent();
                     return false;
                 }
                 else

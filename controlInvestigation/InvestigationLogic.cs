@@ -10,19 +10,19 @@ using investigation.sensors;
 
 namespace investigation.manager
 {
-    internal class Manager
+    internal class InvestigationLogic
     {
         public Agent agent;
         public Room room;
 
-        public Manager(Agent agent,int length)
+        public InvestigationLogic(Agent agent,int length)
         {
             room = new Room(length);
             this.agent = agent;
         }
 
         // function to active sensor
-        public void ActivateSensor()
+        public void ActivateSensors()
         {
             foreach (var sensor in this.room.attachedSensore)
             {
