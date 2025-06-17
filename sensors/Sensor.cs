@@ -9,15 +9,15 @@ namespace investigation.sensors
     public abstract class Sensor
     {
         public string type { get; }
-
+        public bool active { get; protected set; } = false;
         public Sensor(string type)
         {
             this.type = type;
         }
 
-        public virtual void Activate(int index,string[] sensors)
+        public virtual void Activate()
         {
-            sensors[index] = this.type;
+            this.active = true;
         }
     }
 }

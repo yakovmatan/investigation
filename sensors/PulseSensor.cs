@@ -14,16 +14,17 @@ namespace investigation.sensors
 
         }
 
-        public override void Activate(int index, string[] sensors)
+        public override void Activate()
         {
             if (count == 3)
             {
+                this.active = false;
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("⚠️ Sensor is broken and can no longer be used.");
+                Console.WriteLine("⚠️ Sensor pulse is broken and can no longer be used.");
                 Console.ResetColor();
                 return;
             }
-            base.Activate(index, sensors);
+            base.Activate();
             count++;
         }
     }
