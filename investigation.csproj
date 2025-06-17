@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="iranianAgents\Agent.cs" />
     <Compile Include="iranianAgents\FootSoldier.cs" />
+    <Compile Include="iranianAgents\IAttackAgent.cs" />
+    <Compile Include="iranianAgents\SeniorCommander.cs" />
     <Compile Include="iranianAgents\SquadLeader.cs" />
     <Compile Include="controlInvestigation\InvestigationController.cs" />
     <Compile Include="controlInvestigation\InvestigationLogic.cs" />

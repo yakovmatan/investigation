@@ -9,7 +9,6 @@ namespace investigation.iranianAgents
 {
     internal interface IAttackAgent
     {
-        int CounterAttack {get; set;}
-        void Attack(Sensor[] sensor);
+        void Attack(Sensor[] sensors);
     }
 }
