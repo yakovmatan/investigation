@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace investigation.sensors
 {
-    internal abstract class Sensor
+    public abstract class Sensor
     {
         public string type { get; }
 
