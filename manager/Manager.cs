@@ -13,33 +13,22 @@ namespace investigation.manager
     internal class Manager
     {
         public Agent agent;
-        private Sensor audioSensore = new AudioSensor();
-        private Sensor thermalSensor = new ThermalSensor();
-        private Sensor pulseSensor = new PulseSensor();
-        public Dictionary<string,Sensor> availableSensors;
-        private Room room;
+        public Room room;
 
         public Manager(Agent agent,int length)
         {
             room = new Room(length);
             this.agent = agent;
-            this.availableSensors = new Dictionary<string,Sensor> 
-            {
-                {audioSensore.type,audioSensore },
-                {thermalSensor.type, thermalSensor },
-                {pulseSensor.type,pulseSensor }
-            };
         }
 
         // function to active sensor
-        public void ActivateSensor(int num,string type)
+        public void ActivateSensor()
         {
-            foreach (var keyValue in this.availableSensors)
+            foreach (var sensor in this.room.attachedSensore)
             {
-                if (type == keyValue.Key)
-                {
-                    keyValue.Value.Activate(num,room.attachedSensore);
-                }
+                if (sensor == null)
+                    continue;
+                sensor.Activate();
             }
         }
         // function to get how much is maches

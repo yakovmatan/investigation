@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using investigation.iranianAgents;
+using investigation.sensors;
 
 namespace investigation.manager
 {
@@ -67,13 +68,11 @@ namespace investigation.manager
 
             Console.WriteLine("Available sensor type");
             Console.Write("types: ");
-            foreach (var sensor in manager.availableSensors)
-            {
-                Console.Write($"{sensor.Key}, ");
-            }
-            Console.WriteLine();
+            Console.WriteLine(string.Join(", ", TypesOfSensors));
             string choose = this.ValidSensorSelection();
-            manager.ActivateSensor( chosenIndex, choose);
+            Sensor sensor = SensorFactory.CreateSensor(choose);
+            manager.room.Attach(chosenIndex, sensor);
+            manager.ActivateSensor( );
         }
 
         public bool ShowMatches()
@@ -108,7 +107,7 @@ namespace investigation.manager
             {
                 choose = Console.ReadLine().ToLower();
 
-                bool isValid = manager.availableSensors.ContainsKey(choose);
+                bool isValid = this.TypesOfSensors.Contains(choose);
 
                 if (isValid)
                 {
@@ -117,11 +116,8 @@ namespace investigation.manager
 
                 Console.WriteLine("Invalid sensor type. Please choose from the available sensors:");
                 Console.Write("Available types: ");
-                foreach (var sensor in manager.availableSensors)
-                {
-                    Console.Write(sensor.Key + ", ");
-                }
-                Console.WriteLine();
+                Console.WriteLine(string.Join(", ", TypesOfSensors));
+
             }
             return choose;
 

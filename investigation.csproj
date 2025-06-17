@@ -54,6 +54,7 @@
     <Compile Include="sensors\AudioSensor.cs" />
     <Compile Include="sensors\PulseSensor.cs" />
     <Compile Include="sensors\Sensor.cs" />
+    <Compile Include="sensors\SensorFactory.cs" />
     <Compile Include="sensors\ThermalSensor.cs" />
   </ItemGroup>
   <ItemGroup>

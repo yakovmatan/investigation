@@ -23,24 +23,24 @@ namespace investigation.room
 
         private Dictionary<string,int> FromListToDict()
         {
-            Dictionary<string, int> dictActiveSensore = new Dictionary<string, int>();
+            Dictionary<string, int> dictAttachedSensore = new Dictionary<string, int>();
 
             for (int i = 0; i < attachedSensore.Length; i++)
             {
-                string current = this.attachedSensore[i].type;
-                if (string.IsNullOrEmpty(current))
+                Sensor current = this.attachedSensore[i];
+                if (current == null || !current.active)
                     continue;
 
-                if (dictActiveSensore.ContainsKey(current))
+                if (dictAttachedSensore.ContainsKey(current.type))
                 {
-                    dictActiveSensore[current] += 1;
+                    dictAttachedSensore[current.type] += 1;
                 }
                 else
                 {
-                    dictActiveSensore[current] = 1;
+                    dictAttachedSensore[current.type] = 1;
                 }
             }
-            return dictActiveSensore;
+            return dictAttachedSensore;
         }
 
         public int NumOfMatches(Dictionary<string,int> weaknessSensors)

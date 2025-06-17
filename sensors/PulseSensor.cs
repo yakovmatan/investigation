@@ -16,8 +16,10 @@ namespace investigation.sensors
 
         public override void Activate()
         {
+            int counter = 0;
             if (count == 3)
             {
+                counter++;
                 this.active = false;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("⚠️ Sensor pulse is broken and can no longer be used.");
