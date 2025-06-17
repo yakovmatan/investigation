@@ -9,32 +9,38 @@ namespace investigation.room
 {
     internal class Room
     {
-        public string[] activeSensore;
+        public Sensor[] attachedSensore;
 
         public Room(int length)
         {
-            activeSensore = new string[length];
+            attachedSensore = new Sensor[length];
+        }
+
+        public  void Attach(int index,Sensor sensor)
+        {
+            attachedSensore[index] = sensor;
         }
 
         private Dictionary<string,int> FromListToDict()
         {
-            Dictionary<string, int> dictActiveSensore = new Dictionary<string, int>();
+            Dictionary<string, int> dictAttachedSensore = new Dictionary<string, int>();
 
-            for (int i = 0; i < activeSensore.Length; i++)
+            for (int i = 0; i < attachedSensore.Length; i++)
             {
-                if (string.IsNullOrEmpty(this.activeSensore[i]))
+                Sensor current = this.attachedSensore[i];
+                if (current == null || !current.active)
                     continue;
 
-                if (dictActiveSensore.ContainsKey(this.activeSensore[i]))
+                if (dictAttachedSensore.ContainsKey(current.type))
                 {
-                    dictActiveSensore[this.activeSensore[i]] += 1;
+                    dictAttachedSensore[current.type] += 1;
                 }
                 else
                 {
-                    dictActiveSensore[this.activeSensore[i]] = 1;
+                    dictAttachedSensore[current.type] = 1;
                 }
             }
-            return dictActiveSensore;
+            return dictAttachedSensore;
         }
 
         public int NumOfMatches(Dictionary<string,int> weaknessSensors)

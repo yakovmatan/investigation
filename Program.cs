@@ -12,7 +12,7 @@ namespace investigation
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Display display = new Display();
+            InvestigationController display = new InvestigationController();
             while(true)
             {
                 display.EnterChoose();
