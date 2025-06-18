@@ -10,17 +10,10 @@ namespace investigation.manager
 {
     internal class InvestigationController
     {
-        private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse", "magnetic", "motion" };
         private List<Agent> agents;
         private int currentAgentIndex = 0;
         private InvestigationSupport manager;
-        private Dictionary<string, int> numOfSensors = new Dictionary<string, int>
-        {
-            {"foot soldier",2 },
-            {"squad leader", 4 },
-            {"senior commander", 6 },
-            {"organization leader", 8 }
-        };
+        
             
         public InvestigationController()
         {
@@ -71,7 +64,7 @@ namespace investigation.manager
 
         public bool ShowMatches()
         {
-            int numOfMatches = manager.NumOfMatches();
+            int numOfMatches = manager.GetMatchCount();
             Console.WriteLine($"{numOfMatches}/{numOfSensors[manager.agent.type]} matched");
             if (numOfMatches == numOfSensors[manager.agent.type])
             {
