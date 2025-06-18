@@ -28,7 +28,7 @@ namespace investigation.DataBase
                         }
                     }
 
-                    using (var insertCmd = new MySqlCommand("INSERT INTO users (userName, currentAgentIndex) VALUES (@username,1)", conn))
+                    using (var insertCmd = new MySqlCommand("INSERT INTO users (username, currentAgentIndex) VALUES (@username,1)", conn))
                     {
                         insertCmd.Parameters.AddWithValue("@username", userName);
                         insertCmd.ExecuteNonQuery();
@@ -42,8 +42,28 @@ namespace investigation.DataBase
                 return 1;
             }
             
-            
+        }
 
+        public static void SaveProgress(string userName, int currentAgentIndex)
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    using (var cmd = new MySqlCommand("UPDATE users SET currentAgentIndex = @index WHERE username = @username",conn))
+                    {
+                        cmd.Parameters.AddWithValue("@index", currentAgentIndex);
+                        cmd.Parameters.AddWithValue("@username", userName);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error saving user progress" + ex.Message);
+            }
         }
     }
 }
