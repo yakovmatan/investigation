@@ -10,7 +10,7 @@ namespace investigation.sensors
     internal class MagneticSensor:Sensor
     {
         private bool alreadyCanceled = false;
-        public MagneticSensor() : base("pulse")
+        public MagneticSensor() : base("magnetic")
         {
 
         }

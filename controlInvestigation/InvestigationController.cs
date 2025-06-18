@@ -10,7 +10,7 @@ namespace investigation.manager
 {
     internal class InvestigationController
     {
-        private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse" };
+        private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse", "magnetic", "motion" };
         private List<Agent> agents;
         private int currentAgentIndex = 0;
         private InvestigationLogic manager;
@@ -28,7 +28,9 @@ namespace investigation.manager
             agents = new List<Agent>
             {
                 new FootSoldier(TypesOfSensors),
-                new SquadLeader(TypesOfSensors)
+                new SquadLeader(TypesOfSensors),
+                new SeniorCommander(TypesOfSensors),
+                new OrganizationLeader(TypesOfSensors)
             };
             InitLogicForCurrentAgent();
 

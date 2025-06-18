@@ -15,8 +15,11 @@ namespace investigation.sensors
                 case "audio": return new AudioSensor();
                 case "thermal": return new ThermalSensor();
                 case "pulse": return new PulseSensor();
+                case "motion": return new MotionSensor();
+                case "magnetic": return new MagneticSensor();
 
-                
+
+
                 default: throw new ArgumentException("Invalid sensor type");
             }
         }
