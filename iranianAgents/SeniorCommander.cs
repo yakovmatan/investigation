@@ -9,7 +9,7 @@ namespace investigation.iranianAgents
 {
     internal class SeniorCommander:Agent,IAttackAgent
     {
-        private int CounterAttack = 0;
+        public int CounterAttack { get; set; } = 0;
 
         public SeniorCommander(List<string> availableSensors):base(6,availableSensors,"senior commander")
         {
@@ -18,7 +18,7 @@ namespace investigation.iranianAgents
 
         public void Attack(Sensor[] sensors)
         {
-            if (CounterAttack % 3 == 0)
+            if (CounterAttack > 0 && CounterAttack % 3 == 0)
             {
                 int sensorsCount = sensors.Count(s => s != null);
                 if (sensorsCount == 0) return;

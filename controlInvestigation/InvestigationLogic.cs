@@ -29,6 +29,10 @@ namespace investigation.manager
                 if (sensor == null)
                     continue;
                 sensor.Activate();
+                if (sensor is MagneticSensor magnetic)
+                {
+                    magnetic.CanelingAttack(agent);
+                }
             }
         }
         // function to get how much is maches

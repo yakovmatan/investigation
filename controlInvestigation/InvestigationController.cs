@@ -10,7 +10,7 @@ namespace investigation.manager
 {
     internal class InvestigationController
     {
-        private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse" };
+        private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse", "magnetic", "motion" };
         private List<Agent> agents;
         private int currentAgentIndex = 0;
         private InvestigationLogic manager;
@@ -19,7 +19,7 @@ namespace investigation.manager
             {"foot soldier",2 },
             {"squad leader", 4 },
             {"senior commander", 6 },
-            {"organisation leader", 8 }
+            {"organization leader", 8 }
         };
             
         public InvestigationController()
@@ -28,7 +28,9 @@ namespace investigation.manager
             agents = new List<Agent>
             {
                 new FootSoldier(TypesOfSensors),
-                new SquadLeader(TypesOfSensors)
+                new SquadLeader(TypesOfSensors),
+                new SeniorCommander(TypesOfSensors),
+                new OrganizationLeader(TypesOfSensors)
             };
             InitLogicForCurrentAgent();
 
@@ -73,6 +75,10 @@ namespace investigation.manager
             Sensor sensor = SensorFactory.CreateSensor(choose);
             manager.room.Attach(chosenIndex, sensor);
             manager.ActivateSensors( );
+            if (agents[currentAgentIndex] is IAttackAgent attackAgent)
+            {
+                attackAgent.Attack(this.manager.room.attachedSensore);
+            }
         }
 
         public bool ShowMatches()
