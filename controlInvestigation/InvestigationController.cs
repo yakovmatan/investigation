@@ -11,7 +11,7 @@ namespace investigation.manager
 {
     internal class InvestigationController
     {
-        private int currentAgentIndex = 0;
+        private int currentAgentIndex = 1;
         private InvestigationSupport logic = new InvestigationSupport();
         
             

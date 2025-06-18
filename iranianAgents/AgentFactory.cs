@@ -12,10 +12,10 @@ namespace investigation.iranianAgents
         {
             switch(index)
             {
-                case 0: return new FootSoldier(sensorTypes);
-                case 1: return new SquadLeader(sensorTypes);
-                case 2: return new SeniorCommander(sensorTypes);
-                case 3: return new OrganizationLeader(sensorTypes);
+                case 1: return new FootSoldier(sensorTypes);
+                case 2: return new SquadLeader(sensorTypes);
+                case 3: return new SeniorCommander(sensorTypes);
+                case 4: return new OrganizationLeader(sensorTypes);
                 default: throw new ArgumentException("Invalid agent index");
             }
         }
