@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using investigation.iranianAgents;
@@ -10,31 +11,21 @@ namespace investigation.manager
 {
     internal class InvestigationController
     {
-        private List<Agent> agents;
         private int currentAgentIndex = 0;
-        private InvestigationSupport manager;
+        private InvestigationSupport logic = new InvestigationSupport();
         
             
         public InvestigationController()
         {
             this.ShowWelcome();
-            agents = new List<Agent>
-            {
-                new FootSoldier(TypesOfSensors),
-                new SquadLeader(TypesOfSensors),
-                new SeniorCommander(TypesOfSensors),
-                new OrganizationLeader(TypesOfSensors)
-            };
-            InitLogicForCurrentAgent();
+            InitCurrentAgent();
 
         }
 
-        private void InitLogicForCurrentAgent()
+        private void InitCurrentAgent()
         {
-            Agent currentAgent = agents[currentAgentIndex];
-            int amount = numOfSensors[currentAgent.type];
-            manager = new InvestigationSupport(currentAgent, amount);
-
+            Agent currentAgent = AgentFactory.createAgent(currentAgentIndex,logic.SensorTypes);
+            logic.InitNewAgent(currentAgent);
             Console.WriteLine($"\n--- New Iranian Agent Detected: {currentAgent.type.ToUpper()} ---");
         }
 
@@ -45,35 +36,32 @@ namespace investigation.manager
             Console.WriteLine("Terrorist is waitin in room 8");
         }
 
-        public void Invastigation()
+        public void InvastigationRound()
         {
-            Console.WriteLine($"In which location would you like to set the sensor? (0 - {numOfSensors[manager.agent.type] - 1})");
+            Console.WriteLine($"In which location would you like to set the sensor? (0 - {logic.GetRequiredSensorCount() - 1})");
             int chosenIndex = this.ValidIndexSelection();
-            Console.WriteLine("Available sensor type");
-            Console.Write("types: ");
-            Console.WriteLine(string.Join(", ", TypesOfSensors));
+            Console.WriteLine("Available sensor types:");
+            Console.WriteLine(string.Join(", ", logic.SensorTypes));
             string choose = this.ValidSensorSelection();
             Sensor sensor = SensorFactory.CreateSensor(choose);
-            manager.room.Attach(chosenIndex, sensor);
-            manager.ActivateSensors( );
-            if (agents[currentAgentIndex] is IAttackAgent attackAgent)
-            {
-                attackAgent.Attack(this.manager.room.attachedSensore);
-            }
+            logic.AttachSensor(chosenIndex, sensor);
+            logic.ActivateSensors();
+            logic.HandleAttack();
         }
 
         public bool ShowMatches()
         {
-            int numOfMatches = manager.GetMatchCount();
-            Console.WriteLine($"{numOfMatches}/{numOfSensors[manager.agent.type]} matched");
-            if (numOfMatches == numOfSensors[manager.agent.type])
+            int numOfMatches = logic.GetMatchCount();
+            int required = logic.GetRequiredSensorCount();
+            Console.WriteLine($"{numOfMatches}/{required} matched");
+            if (logic.IsFullMatched())
             {
-                Console.WriteLine($"✔ Iranian agent exposed! ({manager.agent.type})");
+                Console.WriteLine($"✔ Iranian agent exposed! ({logic.agent.type})");
                 currentAgentIndex++;
-                if (currentAgentIndex < agents.Count)
+                if (currentAgentIndex < AgentFactory.GetTotalAgentTypes())
                 {
                     Console.WriteLine("\n➡ Proceeding to the next agent...");
-                    InitLogicForCurrentAgent();
+                    InitCurrentAgent();
                     return false;
                 }
                 else
@@ -88,25 +76,21 @@ namespace investigation.manager
         private string ValidSensorSelection()
         {
             Console.WriteLine("Enter sensor type:");
-            string choose;
-
+            
             while (true)
             {
-                choose = Console.ReadLine().ToLower();
-
-                bool isValid = this.TypesOfSensors.Contains(choose);
-
-                if (isValid)
+                string choose = Console.ReadLine().ToLower();
+                if (logic.SensorTypes.Contains(choose))
                 {
-                    break; 
+                    return choose;
                 }
 
                 Console.WriteLine("Invalid sensor type. Please choose from the available sensors:");
                 Console.Write("Available types: ");
-                Console.WriteLine(string.Join(", ", TypesOfSensors));
+                Console.WriteLine(string.Join(", ", logic.SensorTypes));
 
             }
-            return choose;
+            
 
         }
 
@@ -116,12 +100,12 @@ namespace investigation.manager
             {
                 string input = Console.ReadLine();
 
-                if (int.TryParse(input, out int chosenIndex) && chosenIndex >= 0 && chosenIndex < numOfSensors[manager.agent.type])
+                if (int.TryParse(input, out int chosenIndex) && chosenIndex >= 0 && chosenIndex < logic.GetRequiredSensorCount())
                 {
                     return chosenIndex;
                 }
 
-                Console.WriteLine($"Invalid number. Please enter a number between 0 and {numOfSensors[manager.agent.type] - 1}.");
+                Console.WriteLine($"Invalid number. Please enter a number between 0 and {logic.GetRequiredSensorCount() - 1}.");
             }
         }
     }

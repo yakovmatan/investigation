@@ -27,8 +27,8 @@ namespace investigation.manager
 
         public void InitNewAgent(Agent agent)
         {
-            room = new Room(this.GetRequiredSensorCount());
             this.agent = agent;
+            room = new Room(this.GetRequiredSensorCount());
         }
 
         public int GetRequiredSensorCount()
