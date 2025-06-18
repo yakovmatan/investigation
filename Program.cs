@@ -15,7 +15,7 @@ namespace investigation
             InvestigationController display = new InvestigationController();
             while(true)
             {
-                display.EnterChoose();
+                display.InvastigationRound();
                 bool gameEnded = display.ShowMatches();
                 if (gameEnded)
                 {

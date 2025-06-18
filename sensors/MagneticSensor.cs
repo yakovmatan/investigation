@@ -15,7 +15,7 @@ namespace investigation.sensors
 
         }
 
-        public void CanelingAttack(Agent agent)
+        public void CancelingAttack(Agent agent)
         {
             if (alreadyCanceled) return;
 

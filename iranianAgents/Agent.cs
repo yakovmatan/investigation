@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace investigation.iranianAgents
 {
-    internal abstract class Agent
+    public abstract class Agent
     {
         public string type { get; }
         protected static Random random = new Random();
