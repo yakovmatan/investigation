@@ -10,12 +10,12 @@ using investigation.sensors;
 
 namespace investigation.manager
 {
-    internal class InvestigationLogic
+    internal class InvestigationSupport
     {
         public Agent agent;
         public Room room;
 
-        public InvestigationLogic(Agent agent,int length)
+        public InvestigationSupport(Agent agent,int length)
         {
             room = new Room(length);
             this.agent = agent;

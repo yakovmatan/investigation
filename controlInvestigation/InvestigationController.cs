@@ -13,7 +13,7 @@ namespace investigation.manager
         private List<string> TypesOfSensors = new List<string> { "audio", "thermal", "pulse", "magnetic", "motion" };
         private List<Agent> agents;
         private int currentAgentIndex = 0;
-        private InvestigationLogic manager;
+        private InvestigationSupport manager;
         private Dictionary<string, int> numOfSensors = new Dictionary<string, int>
         {
             {"foot soldier",2 },
@@ -40,7 +40,7 @@ namespace investigation.manager
         {
             Agent currentAgent = agents[currentAgentIndex];
             int amount = numOfSensors[currentAgent.type];
-            manager = new InvestigationLogic(currentAgent, amount);
+            manager = new InvestigationSupport(currentAgent, amount);
 
             Console.WriteLine($"\n--- New Iranian Agent Detected: {currentAgent.type.ToUpper()} ---");
         }
@@ -52,22 +52,10 @@ namespace investigation.manager
             Console.WriteLine("Terrorist is waitin in room 8");
         }
 
-        public void EnterChoose()
+        public void Invastigation()
         {
             Console.WriteLine($"In which location would you like to set the sensor? (0 - {numOfSensors[manager.agent.type] - 1})");
-            int chosenIndex;
-            while (true)
-            {
-                string input = Console.ReadLine();
-
-                if (int.TryParse(input, out chosenIndex) && chosenIndex >= 0 && chosenIndex < numOfSensors[manager.agent.type])
-                {
-                    break; 
-                }
-
-                Console.WriteLine($"Invalid number. Please enter a number between 0 and { numOfSensors[manager.agent.type] - 1}.");
-            }
-
+            int chosenIndex = this.ValidIndexSelection();
             Console.WriteLine("Available sensor type");
             Console.Write("types: ");
             Console.WriteLine(string.Join(", ", TypesOfSensors));
@@ -127,6 +115,21 @@ namespace investigation.manager
             }
             return choose;
 
+        }
+
+        private int ValidIndexSelection()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int chosenIndex) && chosenIndex >= 0 && chosenIndex < numOfSensors[manager.agent.type])
+                {
+                    return chosenIndex;
+                }
+
+                Console.WriteLine($"Invalid number. Please enter a number between 0 and {numOfSensors[manager.agent.type] - 1}.");
+            }
         }
     }
 }
