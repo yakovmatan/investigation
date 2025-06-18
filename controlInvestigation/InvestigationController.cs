@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using investigation.DataBase;
 using investigation.iranianAgents;
 using investigation.sensors;
 
@@ -13,10 +14,15 @@ namespace investigation.manager
     {
         private int currentAgentIndex = 1;
         private InvestigationSupport logic = new InvestigationSupport();
-        
+        private string currentUser;
             
         public InvestigationController()
         {
+            Console.WriteLine("Enter your username");
+            currentUser = Console.ReadLine();
+
+            currentAgentIndex = DalUserProgress.LoadProgress(currentUser);
+
             this.ShowWelcome();
             InitCurrentAgent();
 
@@ -58,6 +64,8 @@ namespace investigation.manager
             {
                 Console.WriteLine($"✔ Iranian agent exposed! ({logic.agent.type})");
                 currentAgentIndex++;
+
+                DalUserProgress.SaveProgress(currentUser, currentAgentIndex);
                 if (currentAgentIndex < AgentFactory.GetTotalAgentTypes())
                 {
                     Console.WriteLine("\n➡ Proceeding to the next agent...");

@@ -9,12 +9,39 @@ namespace investigation.DataBase
 {
     public static class DalUserProgress
     {
-        private const string connStr = "server=localhost;user=root;password=;database=sensorgame";
+        private const string connStr = "server=localhost;user=root;password=;database=investigationgame";
+
+        private static void EnsureTableExists()
+        {
+            try
+            {
+                using (var conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    using (var cmd = new MySqlCommand(@"
+                CREATE TABLE IF NOT EXISTS users (
+                    username VARCHAR(255) PRIMARY KEY,
+                    currentAgentIndex INT NOT NULL
+                );", conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("error creating table: " + ex.Message);
+            }
+        }
+
 
         public static int LoadProgress(string userName)
         {
             try
-            {using (var conn = new MySqlConnection(connStr))
+            {
+                EnsureTableExists();
+                using (var conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
                     using (var cmd = new MySqlCommand("SELECT currentAgentIndex FROM users WHERE username = @username", conn))
@@ -48,6 +75,7 @@ namespace investigation.DataBase
         {
             try
             {
+                EnsureTableExists();
                 using (var conn = new MySqlConnection(connStr))
                 {
                     conn.Open();
