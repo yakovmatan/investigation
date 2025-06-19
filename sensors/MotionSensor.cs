@@ -23,6 +23,7 @@ namespace investigation.sensors
                 this.active = false;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("⚠️ Sensor motion is broken and can no longer be used.");
+                Console.WriteLine("Please replace it.");
                 Console.ResetColor();
                 return;
             }

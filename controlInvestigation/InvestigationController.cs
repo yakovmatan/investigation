@@ -57,7 +57,39 @@ namespace investigation.manager
 
         public void ShowMatches()
         {
-            int numOfMatches = logic.GetMatchCount();
+            Console.WriteLine("\nSensor bar:");
+
+            foreach (var sensor in logic.room.attachedSensore)
+            {
+                if (sensor == null)
+                {
+                    Console.Write("[●]  ");
+                }
+                else
+                {
+                    string symbol;
+
+                    switch (sensor.type)
+                    {
+                        case "audio": symbol = "🔊"; break;
+                        case "thermal": symbol = "🔥"; break;
+                        case "pulse": symbol = "💓"; break;
+                        case "motion": symbol = "🕴"; break;
+                        case "magnetic": symbol = "🧲"; break;
+                        default: symbol = "❓"; break;
+                    }
+
+
+                    if (!sensor.active)
+                        symbol += "🛑";
+
+                    Console.Write($"[{symbol}]  ");
+                }
+            }
+
+            Console.WriteLine("\n");
+        
+        int numOfMatches = logic.GetMatchCount();
             int required = logic.GetRequiredSensorCount();
             Console.WriteLine($"{numOfMatches}/{required} matched");
             
