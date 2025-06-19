@@ -55,11 +55,16 @@ namespace investigation.manager
             logic.HandleAttack();
         }
 
-        public bool ShowMatches()
+        public void ShowMatches()
         {
             int numOfMatches = logic.GetMatchCount();
             int required = logic.GetRequiredSensorCount();
             Console.WriteLine($"{numOfMatches}/{required} matched");
+            
+        }
+
+        public bool ContinueGame()
+        {
             if (logic.IsFullMatched())
             {
                 Console.WriteLine($"✔ Iranian agent exposed! ({logic.agent.type})");
