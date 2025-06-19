@@ -12,11 +12,12 @@ namespace investigation
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            InvestigationController display = new InvestigationController();
+            InvestigationController gameFlow = new InvestigationController();
             while(true)
             {
-                display.InvastigationRound();
-                bool gameEnded = display.ShowMatches();
+                gameFlow.InvastigationRound();
+                gameFlow.ShowMatches();
+                bool gameEnded = gameFlow.ContinueGame();
                 if (gameEnded)
                 {
                     break;
