@@ -74,7 +74,7 @@ namespace investigation.manager
                         case "audio": symbol = "🔊"; break;
                         case "thermal": symbol = "🔥"; break;
                         case "pulse": symbol = "💓"; break;
-                        case "motion": symbol = "🕴"; break;
+                        case "motion": symbol = "🚶‍♂️"; break;
                         case "magnetic": symbol = "🧲"; break;
                         default: symbol = "❓"; break;
                     }
